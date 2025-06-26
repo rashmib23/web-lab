@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Management</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Submit Attendance</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="student_id" placeholder="Student ID" required>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="course" placeholder="Course" required>
+    <input type="number" name="total" placeholder="Total Classes" required>
+    <input type="number" name="attended" placeholder="Classes Attended" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>Students Below 75% Attendance</h2>
+  <form action="/low-attendance" method="GET">
+    <button type="submit">View List</button>
+  </form>
+
+</body>
+</html>

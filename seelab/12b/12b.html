@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Management</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Student Details</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="student_id" placeholder="Student ID" required>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="subject" placeholder="Subject" required>
+    <input type="number" name="marks" placeholder="Marks" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>View Not Eligible Students</h2>
+  <form method="GET" action="/not-eligible">
+    <button type="submit">Show List</button>
+  </form>
+
+</body>
+</html>

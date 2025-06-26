@@ -1,0 +1,50 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Translate Consonants</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    input, button { padding: 8px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Translate Text</h2>
+  <input type="text" id="inputText" placeholder="Enter text">
+  <button onclick="translateText()">Translate</button>
+  <p id="result"></p>
+
+  <script>
+    function translate(text) {
+      return text.replace(/([bcdfghjklmnpqrstvwxyz])/gi, '$1o$1');
+    }
+
+    function translateText() {
+      const input = document.getElementById('inputText').value;
+      document.getElementById('result').innerText = translate(input);
+    }
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <input type="text" placeholder="Enter text" id="rov" />
+    <button onclick="translateTxt()">Translate</button>
+    <p id="result"></p>
+
+    <script>
+      function translateTxt() {
+        var str = document.getElementById("rov").value.toLowerCase();
+        let res = "";
+        for (let i = 0; i < str.length; i++) {
+          if ("aeiou ".includes(str[i])) {
+            res += str[i];
+          } else {
+            res += str[i] + "o" + str[i];
+          }
+        }
+        document.getElementById("result").innerHTML = res;
+      }
+    </script>
+  </body>
+</html>

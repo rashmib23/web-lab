@@ -1,0 +1,29 @@
+<!-- form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Exam Fee Submission</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button { display: block; margin: 10px 0; padding: 8px; width: 300px; }
+  </style>
+</head>
+<body>
+  <h2>Submit Student Exam Fee</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="name" placeholder="Student Name" required />
+    <input type="text" name="usn" placeholder="USN" required />
+    <input type="number" name="semester" placeholder="Semester" required />
+    <input type="number" name="exam_fee" placeholder="Exam Fee (₹)" />
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>Delete Students with Unpaid Exam Fee</h2>
+  <form method="POST" action="/delete-unpaid">
+    <button type="submit" style="background-color:red;color:white;">Delete Unpaid Students</button>
+  </form>
+</body>
+</html>

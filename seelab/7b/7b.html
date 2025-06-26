@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Enrollment System</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button, textarea {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      width: 300px;
+    }
+    textarea { width: 500px; height: 200px; }
+  </style>
+</head>
+<body>
+
+  <h2>Submit Enrollment</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="studentId" placeholder="Student ID" required>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="courseName" placeholder="Course Name" required>
+    <input type="text" name="duration" placeholder="Duration" required>
+    <input type="text" name="status" placeholder="Status (e.g., active)" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>Update Enrollment Status to "completed"</h2>
+  <input id="studentId" placeholder="Student ID (or leave empty)">
+  <input id="courseName" placeholder="Course Name (used if ID is blank)">
+  <button onclick="updateStatus()">Update Status</button>
+
+  <hr>
+
+  <h2>Show Active Enrollments</h2>
+  <button onclick="loadActive()">Show</button>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    async function updateStatus() {
+      const studentId = document.getElementById('studentId').value;
+      const courseName = document.getElementById('courseName').value;
+
+      const body = studentId ? { studentId } : { courseName };
+
+      const res = await fetch('/update-status', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      alert(data.message || data.error);
+    }
+
+    async function loadActive() {
+      const res = await fetch('/active');
+      const data = await res.json();
+      document.getElementById('output').value = JSON.stringify(data, null, 2);
+    }
+  </script>
+
+</body>
+</html>

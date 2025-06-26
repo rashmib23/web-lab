@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Startup Portal</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Submit Startup Idea</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="id" placeholder="Startup ID" required>
+    <input type="text" name="teamName" placeholder="Team Name" required>
+    <input type="text" name="title" placeholder="Idea Title" required>
+    <input type="text" name="domain" placeholder="Domain (e.g., EdTech)" required>
+    <input type="number" name="funding" placeholder="Funding Required (₹)" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>View EdTech Startups Needing > ₹5,00,000</h2>
+  <form action="/filter" method="GET">
+    <button type="submit">View Startups</button>
+  </form>
+
+</body>
+</html>

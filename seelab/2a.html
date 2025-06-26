@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Month Converter with Closure</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      width: 250px;
+    }
+    #monthName {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Month Number (1–12, decimals allowed)</h2>
+  <input type="text" id="monthInput" placeholder="e.g. 4.7 or 12">
+  <button onclick="displayMonth()">Convert to Month</button>
+  <p id="monthName"></p>
+
+  <script>
+    // Closure function that retains access to the 'months' array
+    const getMonthName = (function() {
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      return function(num) {
+        const monthNum = Math.floor(parseFloat(num)); // Strip decimal part
+        if (monthNum >= 1 && monthNum <= 12) {
+          return months[monthNum - 1];
+        } else {
+          return "Bad Number";
+        }
+      };
+    })();
+
+    function displayMonth() {
+      const input = document.getElementById("monthInput").value;
+      const name = getMonthName(input);
+      document.getElementById("monthName").innerText = name;
+    }
+  </script>
+
+</body>
+</html>

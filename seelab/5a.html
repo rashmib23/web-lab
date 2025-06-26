@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pluralize</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { padding: 8px; margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Pluralize a Noun</h2>
+  <input type="text" id="noun" placeholder="Enter noun">
+  <input type="number" id="number" placeholder="Enter number">
+  <button onclick="showPlural()">Pluralize</button>
+  <p id="result"></p>
+
+  <script>
+    function pluralize(noun, number) {
+      const irregulars = { sheep: "sheep", goose: "geese" };
+      let plural = noun;
+
+      if (number !== 1) {
+        plural = irregulars[noun] || noun + "s";
+      }
+      return `${number} ${plural}`;
+    }
+
+    function showPlural() {
+      const noun = document.getElementById('noun').value;
+      const number = parseInt(document.getElementById('number').value);
+      document.getElementById('result').innerText = pluralize(noun, number);
+    }
+  </script>
+</body>
+</html>

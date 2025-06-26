@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Record Manager</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, button, textarea {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      width: 300px;
+    }
+    textarea { width: 500px; height: 200px; }
+  </style>
+</head>
+<body>
+
+  <h2>Add Student Record</h2>
+  <form method="POST" action="/submit">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="usn" placeholder="USN" required>
+    <input type="text" name="department" placeholder="Department" required>
+    <input type="text" name="grade" placeholder="Grade" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
+  <h2>Update Grade (via PUT)</h2>
+  <input type="text" id="updateName" placeholder="Name">
+  <input type="text" id="newGrade" placeholder="New Grade">
+  <button onclick="updateGrade()">Update Grade</button>
+
+  <hr>
+
+  <h2>All Student Records</h2>
+  <button onclick="loadStudents()">Load Records</button>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    async function updateGrade() {
+      const name = document.getElementById('updateName').value;
+      const grade = document.getElementById('newGrade').value;
+      const res = await fetch('/update-grade', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, grade })
+      });
+      const data = await res.json();
+      alert(data.message || data.error);
+    }
+
+    async function loadStudents() {
+      const res = await fetch('/students');
+      const data = await res.json();
+      document.getElementById('output').value = JSON.stringify(data, null, 2);
+    }
+  </script>
+
+</body>
+</html>

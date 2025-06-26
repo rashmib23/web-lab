@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vowel Count</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input { width: 300px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Count Vowels in a String</h2>
+  <input type="text" id="vowelInput" placeholder="Enter a sentence">
+  <button onclick="countVowels()">Count</button>
+  <p id="vowelResult"></p>
+
+  <script>
+    function vowelCount(str) {
+      const count = { a: 0, e: 0, i: 0, o: 0, u: 0 };
+      for (let char of str.toLowerCase()) {
+        if (count.hasOwnProperty(char)) count[char]++;
+      }
+      return `a, e, i, o, and u appear, respectively, ${count.a}, ${count.e}, ${count.i}, ${count.o}, ${count.u} times.`;
+    }
+
+    function countVowels() {
+      const input = document.getElementById('vowelInput').value;
+      document.getElementById('vowelResult').innerText = vowelCount(input);
+    }
+  </script>
+</body>
+</html>

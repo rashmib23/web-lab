@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Management</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, select, button, textarea {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      width: 300px;
+    }
+    textarea { height: 150px; width: 500px; }
+  </style>
+</head>
+<body>
+
+  <h2>Submit Complaint</h2>
+  <input id="complaintId" placeholder="Complaint ID">
+  <input id="userName" placeholder="User Name">
+  <input id="issue" placeholder="Issue Description">
+  <select id="status">
+    <option value="Pending">Pending</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+  <button onclick="submitComplaint()">Submit</button>
+
+  <h2>Update Complaint Status</h2>
+  <input id="updateId" placeholder="Complaint ID">
+  <select id="newStatus">
+    <option value="Pending">Pending</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+  <button onclick="updateStatus()">Update</button>
+
+  <h2>Pending Complaints</h2>
+  <button onclick="getPending()">Load Pending Complaints</button>
+  <textarea id="output" readonly></textarea>
+
+  <script>
+    const baseUrl = 'http://localhost:3000';
+
+    async function submitComplaint() {
+      const body = {
+        complaintId: document.getElementById('complaintId').value,
+        userName: document.getElementById('userName').value,
+        issue: document.getElementById('issue').value,
+        status: document.getElementById('status').value
+      };
+      const res = await fetch(`${baseUrl}/complaints`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      alert(data.message || data.error);
+    }
+
+    async function updateStatus() {
+      const id = document.getElementById('updateId').value;
+      const status = document.getElementById('newStatus').value;
+      const res = await fetch(`${baseUrl}/complaints/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      const data = await res.json();
+      alert(data.message || data.error);
+    }
+
+    async function getPending() {
+      const res = await fetch(`${baseUrl}/complaints/pending`);
+      const data = await res.json();
+      document.getElementById('output').value = JSON.stringify(data, null, 2);
+    }
+  </script>
+
+</body>
+</html>
